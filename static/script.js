@@ -13,7 +13,7 @@ function checkLogin() {
 
             var canLogin = checkLoginInfo(user, password, userArray);
             if (canLogin === true) {
-                window.location.href = "http://localhost:5000/dashboard";
+                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
                 //window.location.href = "http://heroku:5000/dashboard";
             } else {
                 alert("user or password are not correct");
@@ -68,7 +68,7 @@ function registerNewUser() {
 
     sessionStorage.setItem("wUserArray", JSON.stringify(userArray));
 
-    window.location.href = "http://localhost:5000/login"
+    window.location.href = "https://registro-medico.herokuapp.com/login"
     //window.location.href = "http://heroku:5000/login";
 }
 
@@ -98,12 +98,12 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("wUserArray") == null) {
-        window.location.href = "http://localhost:5000/login"
+        window.location.href = "https://registro-medico.herokuapp.com/login"
         //window.location.href = "http://heroku:5000/login";
     }
     else {
         if (sessionStorage.length == 0) {
-            window.location.href = "http://localhost:5000/login"
+            window.location.href = "https://registro-medico.herokuapp.com/login"
             //window.location.href = "http://heroku:5000/login";
         }
     }
@@ -119,7 +119,7 @@ function setUserNameOnDashboard() {
 
 function logout() {
     sessionStorage.removeItem("wUserArray")
-    window.location.href = "http://localhost:5000/"
+    window.location.href = "https://registro-medico.herokuapp.com/"
     //window.location.href = "http://heroku:5000/";
 }
 
