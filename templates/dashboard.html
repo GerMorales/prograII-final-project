@@ -20,11 +20,11 @@
 
     <div class="main">
         <div class="container">
-            <a href="#" onclick="">addition</a>
+            <a href="#" onclick="hideDivById('add')">addition</a>
         </div>
 
         <div class="main__section">
-            <div style="display:block" id="add" name="w3includes" w3-include-html="{{url_for('add')}}">
+            <div style="display:none" id="add" name="w3includes" w3-include-html="{{url_for('add')}}">
             </div>
         </div>
 
