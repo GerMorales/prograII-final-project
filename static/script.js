@@ -6,7 +6,7 @@ function checkLogin() {
     var user = document.getElementById("user").value;
     var password = document.getElementById("passw").value;
 
-    var userArray = JSON.parse(sessionStorage.getItem("wUserArray"));
+    var userArray = JSON.parse(localStorage.getItem("lUserArray"));
 
     if (user !== null && user !== "") {
         if (password !== null && password !== "") {
@@ -14,7 +14,7 @@ function checkLogin() {
             var canLogin = checkLoginInfo(user, password, userArray);
             if (canLogin === true) {
                 window.location.href = "https://registro-medico.herokuapp.com/dashboard";
-                //window.location.href = "http://heroku:5000/dashboard";
+
             } else {
                 alert("user or password are not correct");
             }
@@ -39,6 +39,30 @@ function checkLoginInfo(user, password, userArray) {
     return false;
 }
 
+function getUserRole(pUser, pPassword, pUserArray) {
+    var role = ""
+    if (pUserArray !== null && pUserArray.length > 0) {
+        var length = pUserArray.length
+        for (var i = 0; i < length; i++) {
+            if (pUserArray[i].user === pUser && pUserArray[i].password === pPassword) {
+                role = pUserArray[i].role
+                break
+            }
+        }
+    }
+    return role
+}
+
+function createSessionUser(user, password, role) {
+    var logged_user = {
+        user: user,
+        password: password,
+        role: role
+    };
+
+    sessionStorage.setItem("loggedUser", JSON.stringify(logged_user));
+}
+
 /*
 ************* login functionality end
 */
@@ -51,25 +75,27 @@ function checkLoginInfo(user, password, userArray) {
 function registerNewUser() {
     var reg_user = document.getElementById("user_reg").value;
     var reg_password = document.getElementById("passw_reg").value;
+    var reg_role = "client";
 
     //alert(reg_user);
     var userArray = [];
 
-    if (sessionStorage.getItem("wUserArray") !== null) {
-        userArray = JSON.parse(sessionStorage.getItem("wUserArray"));
+    if (localStorage.getItem("lUserArray") !== null) {
+        userArray = JSON.parse(localStorage.getItem("lUserArray"));
     }
 
     var current_reg = {
         user: reg_user,
-        password: reg_password
+        password: reg_password,
+        role: reg_role
     };
 
     userArray.push(current_reg);
 
-    sessionStorage.setItem("wUserArray", JSON.stringify(userArray));
+    localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
     window.location.href = "https://registro-medico.herokuapp.com/login"
-    //window.location.href = "http://heroku:5000/login";
+
 }
 
 /*
@@ -111,9 +137,8 @@ function checkForValidLoginSession() {
     hacia el login
     */
 
-    if (sessionStorage.getItem("wUserArray") == null) {
+    if (sessionStorage.getItem("loggedUser") == null) {
         window.location.href = "https://registro-medico.herokuapp.com/login"
-        //window.location.href = "http://heroku:5000/login";
     }
     else {
         if (sessionStorage.length == 0) {
@@ -124,20 +149,42 @@ function checkForValidLoginSession() {
 }
 
 function setUserNameOnDashboard() {
-    var userArray = JSON.parse(sessionStorage.getItem("wUserArray"))
-    var currentUser = userArray[0].user
+    var userArray = JSON.parse(sessionStorage.getItem("loggedUser"))
+    var currentUser = userArray.user
+    var currentRole = userArray.role
 
     var userSpan = document.getElementById("user")
-    userSpan.innerText = "Hello, " + currentUser
+    userSpan.innerText = "Hello, " + currentRole + " " + currentUser
 }
 
 function logout() {
-    sessionStorage.removeItem("wUserArray")
+    sessionStorage.removeItem("loggedUser")
     window.location.href = "https://registro-medico.herokuapp.com/"
-    //window.location.href = "http://heroku:5000/";
+
 }
 
+/*
+Dejo comentado este código para trabajarlo luego con los resultados que dejen los usuarios
 
+function addResultToStorage(pNum1, pNum2, pResult) {
+    var addResultArray = [];
+
+    if (localStorage.getItem("lAddResultArray") !== null) {
+        addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
+    }
+
+    var current_add_result = {
+        user: "test",
+        num1: pNum1,
+        num2: pNum2,
+        result: pResult
+    }
+
+    addResultArray.push(current_add_result)
+    localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray));
+}
+
+*/
 /*
 ************* dashboard functionality end
 */
