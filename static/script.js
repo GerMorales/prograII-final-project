@@ -140,12 +140,6 @@ function checkForValidLoginSession() {
     if (sessionStorage.getItem("loggedUser") == null) {
         window.location.href = "https://registro-medico.herokuapp.com/login"
     }
-    else {
-        if (sessionStorage.length == 0) {
-            window.location.href = "https://registro-medico.herokuapp.com/login"
-            //window.location.href = "http://heroku:5000/login";
-        }
-    }
 }
 
 function setUserNameOnDashboard() {
