@@ -30,6 +30,9 @@ def dashboard():
 def initialForm():
     return render_template("initialForm.html")
 
+@app.route("/cataloge")
+def cataloge():
+    return render_template("cataloge.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
