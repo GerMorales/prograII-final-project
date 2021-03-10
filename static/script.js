@@ -13,6 +13,9 @@ function checkLogin() {
 
             var canLogin = checkLoginInfo(user, password, userArray);
             if (canLogin === true) {
+                //need a method to get the role and send it into createSessionUser below
+                var role = getUserRole(user, password, userArray)
+                createSessionUser(user, password, role)
                 window.location.href = "https://registro-medico.herokuapp.com/dashboard";
 
             } else {
