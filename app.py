@@ -34,5 +34,9 @@ def initialForm():
 def cataloge():
     return render_template("cataloge.html")
 
+@app.route("/agendarCitas")
+def agendarCitas():
+    return render_template("agendarCitas.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
