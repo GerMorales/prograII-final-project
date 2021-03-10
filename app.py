@@ -26,9 +26,9 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/add")
-def add():
-    return render_template("add.html")
+@app.route("/initialForm")
+def initialForm():
+    return render_template("initialForm.html")
 
 
 if __name__ == "__main__":
