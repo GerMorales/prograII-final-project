@@ -16,8 +16,8 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
-
+                window.location.href = "http://localhost:5000/dashboard";
+                //window.location.href = "http://heroku:5000/dashboard";
             } else {
                 alert("user or password are not correct");
             }
@@ -97,8 +97,8 @@ function registerNewUser() {
 
     localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
-    window.location.href = "https://registro-medico.herokuapp.com/login"
-
+    window.location.href = "http://localhost:5000/login"
+    //window.location.href = "http://heroku:5000/login";
 }
 
 /*
@@ -110,20 +110,6 @@ function registerNewUser() {
 ************* dashboard functionality begin
 */
 
-function hideDivById(divId) {
-    hideAllDivW3Includes()
-    var element = document.getElementById(divId)
-    if (element.style.display === "none") {
-        element.style.display = "block"
-    }
-}
-
-function hideAllDivW3Includes() {
-    var elementArray = document.getElementsByName("w3includes")
-    for (var element of elementArray) {
-        element.style.display = "none"
-    }
-}
 
 
 if (window.location.href.includes("dashboard")) {
@@ -141,29 +127,132 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "https://registro-medico.herokuapp.com/login"
+        window.location.href = "http://localhost:5000/login"
+        //window.location.href = "http://heroku:5000/login";
     }
 }
 
 function setUserNameOnDashboard() {
-    var userArray = JSON.parse(sessionStorage.getItem("loggedUser"))
+    var userArray = getCurrentLoggedUser()
     var currentUser = userArray.user
     var currentRole = userArray.role
 
     var userSpan = document.getElementById("user")
     userSpan.innerText = "Hello, " + currentRole + " " + currentUser
+
+    modifyDashboardForRole(currentRole)
+}
+
+function getCurrentLoggedUser() {
+    var currentLoggedUser = JSON.parse(sessionStorage.getItem("loggedUser"))
+    return currentLoggedUser
+}
+
+function modifyDashboardForRole(pCurrentRole) {
+    var add_admin = document.getElementById("admin")
+    var add_client = document.getElementById("client")
+    if (pCurrentRole === "admin") {
+        //modifcar el dashboard para admin
+        add_admin.style.display = "block"
+        add_client.style.display = "none"
+    } else {
+        //modifcar el dashboard para client
+        add_admin.style.display = "none"
+        add_client.style.display = "block"
+    }
 }
 
 function logout() {
     sessionStorage.removeItem("loggedUser")
-    window.location.href = "https://registro-medico.herokuapp.com/"
-
+    window.location.href = "http://localhost:5000/"
+    //window.location.href = "http://heroku:5000/";
 }
 
 /*
-Dejo comentado este código para trabajarlo luego con los resultados que dejen los usuarios
+************* dashboard functionality end
+*/
 
-function addResultToStorage(pNum1, pNum2, pResult) {
+/*
+************* dashboard functionality add admin
+*/
+if (window.location.href.includes("dashboard")) {
+    var currentLoggedUser = getCurrentLoggedUser()
+    if (currentLoggedUser.role === "admin") {
+
+        const elementToObserve = document.getElementById("admin")
+
+        const observer = new MutationObserver(function () {
+            var currentLoggedUser = getCurrentLoggedUser()
+            loadAddDataFromAllUsers()
+            observer.disconnect()
+        });
+
+        observer.observe(elementToObserve, { subtree: true, childList: true });
+    }
+}
+
+function loadAddDataFromAllUsers() {
+    var addResultArray
+    if (localStorage.getItem("lAddResultArray") !== null) {
+        addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
+    }
+
+    var userTableAdmin = document.getElementById("userTableAdmin")
+    var row
+
+    for (var addResult of addResultArray) {
+        row = userTableAdmin.insertRow(1)
+
+        row.insertCell(0).innerHTML = addResult.user;
+        row.insertCell(1).innerHTML = addResult.num1;
+        row.insertCell(2).innerHTML = addResult.num2;
+        row.insertCell(3).innerHTML = addResult.result;
+        row.insertCell(4).innerHTML = "<a>modify</a>";
+        row.insertCell(5).innerHTML = "<a>delete</a>";
+    }
+}
+
+/*
+************* dashboard functionality add admin
+*/
+
+
+/*
+************* dashboard functionality add client
+*/
+
+function add() {
+    var date1 = document.getElementById("date").value
+    var doctors = document.getElementById("doctores").value
+    var especialidad = document.getElementById("especialidad").value
+    var reason = document.getElementById("reason").value
+
+    cleanForm()
+    addResultToTable(date1, doctors, especialidad, reason)
+    addResultToStorage(date1, doctors, especialidad, reason)
+
+}
+//
+function cleanForm() {
+
+    var date1 = document.getElementById("date").value = ""
+    var doctors = document.getElementById("doctores").value = ""
+    var especialidad = document.getElementById("especialidad").value = ""
+    var reason = document.getElementById("reason").value = ""
+}
+
+function addResultToTable(pDate, pDoctors, pEspecialidad, pReason) {
+    var myTable = document.getElementById("userTableClient")
+
+    var row = myTable.insertRow(1)
+
+    row.insertCell(0).innerHTML = pDate;
+    row.insertCell(1).innerHTML = pDoctors;
+    row.insertCell(2).innerHTML = pEspecialidad;
+    row.insertCell(3).innerHTML = pReason;
+}
+
+function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
     var addResultArray = [];
 
     if (localStorage.getItem("lAddResultArray") !== null) {
@@ -171,17 +260,16 @@ function addResultToStorage(pNum1, pNum2, pResult) {
     }
 
     var current_add_result = {
-        user: "test",
-        num1: pNum1,
-        num2: pNum2,
-        result: pResult
+        date1: pNum1,
+        doctors: pNum2,
+        especialidad: pResult,
+        reason: pReason
     }
 
     addResultArray.push(current_add_result)
     localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray));
 }
 
-*/
 /*
-************* dashboard functionality end
+************* dashboard functionality add client
 */

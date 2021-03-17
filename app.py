@@ -26,17 +26,15 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/initialForm")
-def initialForm():
-    return render_template("initialForm.html")
+@app.route("/add_date")
+def adddate():
+    return render_template("add_date.html")
 
-@app.route("/cataloge")
-def cataloge():
-    return render_template("cataloge.html")
 
-@app.route("/agendarCitas")
-def agendarCitas():
-    return render_template("agendarCitas.html")
+@app.route("/add_adm")
+def addadm():
+    return render_template("add_adm.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
