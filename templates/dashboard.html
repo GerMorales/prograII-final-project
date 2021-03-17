@@ -17,39 +17,21 @@
         <span id="user"></span>
     </div>
 
-
-    <div class="main">
-        <div class="container">
-            <a href="#" onclick="hideDivById('initialForm')">Formulario Inicial</a>
-        </div>
-
-        <div class="main__section">
-            <div style="display:none" id="initialForm" name="w3includes" w3-include-html="{{url_for('initialForm')}}">
-            </div>
-        </div>
-
-        <div class="container">
-            <a href="#" onclick="hideDivById('cataloge')">Catálogo Médico</a>
-        </div>
-
-        <div class="main__section">
-            <div style="display:none" id="cataloge" name="w3includes" w3-include-html="{{url_for('cataloge')}}">
-            </div>
-        </div>
-
-        <div class="container">
-            <a href="#" onclick="hideDivById('agendarCitas')">Agendar una cita</a>
-        </div>
-
-        <div class="main__section">
-            <div style="display:none" id="agendarCitas" name="w3includes" w3-include-html="{{url_for('agendarCitas')}}">
-            </div>
-        </div>
-    </div>
-
     <div>
         <a onclick="logout()" href="">logout</a>
     </div>
+
+    <div class="main">
+
+        <div class="main__section" id="main_section">
+            <div style="display:block" id="client" name="w3includes" w3-include-html="http://localhost:5000/add_date">
+            </div>
+            <div style="display:block" id="admin" name="w3includes" w3-include-html="http://localhost:5000/add_adm">
+            </div>
+        </div>
+
+    </div>
+
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="{{url_for('static', filename='script.js')}}"></script>

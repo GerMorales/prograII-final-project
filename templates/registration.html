@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>registration</title>
+    <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 
@@ -16,11 +17,6 @@
         <input type="text" name="user" id="user_reg" placeholder="user...">
         <label for="passw_reg">password</label>
         <input type="text" name="passw" id="passw_reg" placeholder="password...">
-        <label for="role">role</label>
-        <select name="role" id="role">
-            <option value="client">client</option>
-            <option value="admin">admin</option>
-        </select>
         <button onclick="registerNewUser()">register</button>
     </div>
 
