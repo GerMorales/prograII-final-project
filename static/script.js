@@ -16,7 +16,7 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "http://localhost:5000/dashboard";
+                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
                 //window.location.href = "http://heroku:5000/dashboard";
             } else {
                 alert("user or password are not correct");
@@ -97,7 +97,7 @@ function registerNewUser() {
 
     localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
-    window.location.href = "http://localhost:5000/login"
+    window.location.href = "https://registro-medico.herokuapp.com/login"
     //window.location.href = "http://heroku:5000/login";
 }
 
@@ -127,7 +127,7 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "http://localhost:5000/login"
+        window.location.href = "https://registro-medico.herokuapp.com/login"
         //window.location.href = "http://heroku:5000/login";
     }
 }
@@ -164,22 +164,22 @@ function modifyDashboardForRole(pCurrentRole) {
 
 function logout() {
     sessionStorage.removeItem("loggedUser")
-    window.location.href = "http://localhost:5000/"
+    window.location.href = "https://registro-medico.herokuapp.com/"
     //window.location.href = "http://heroku:5000/";
 }
 
 function initialForm() {
-    window.location.href = "http://localhost:5000/initialForm"
+    window.location.href = "https://registro-medico.herokuapp.com/initialForm"
     //window.location.href = "http://heroku:5000/";
 }
 
 function cataloge() {
-    window.location.href = "http://localhost:5000/cataloge"
+    window.location.href = "https://registro-medico.herokuapp.com/cataloge"
     //window.location.href = "http://heroku:5000/";
 }
 
 function appointment() {
-    window.location.href = "http://localhost:5000/appointment"
+    window.location.href = "https://registro-medico.herokuapp.com/appointment"
     //window.location.href = "http://heroku:5000/";
 }
 /*
