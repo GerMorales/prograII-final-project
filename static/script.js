@@ -168,6 +168,20 @@ function logout() {
     //window.location.href = "http://heroku:5000/";
 }
 
+function initialForm() {
+    window.location.href = "http://localhost:5000/initialForm"
+    //window.location.href = "http://heroku:5000/";
+}
+
+function cataloge() {
+    window.location.href = "http://localhost:5000/cataloge"
+    //window.location.href = "http://heroku:5000/";
+}
+
+function appointment() {
+    window.location.href = "http://localhost:5000/appointment"
+    //window.location.href = "http://heroku:5000/";
+}
 /*
 ************* dashboard functionality end
 */

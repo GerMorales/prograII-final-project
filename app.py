@@ -26,10 +26,21 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/add_date")
-def adddate():
-    return render_template("add_date.html")
+@app.route("/add_client")
+def addclient():
+    return render_template("add_client.html")
 
+@app.route("/initialForm")
+def initialForm():
+    return render_template("initialForm.html")
+
+@app.route("/cataloge")
+def cataloge():
+    return render_template("cataloge.html")
+
+@app.route("/appointment")
+def appointment():
+    return render_template("appointment.html")
 
 @app.route("/add_adm")
 def addadm():
