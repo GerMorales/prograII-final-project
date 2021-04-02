@@ -6,6 +6,7 @@ function checkLogin() {
     var user = document.getElementById("user").value;
     var password = document.getElementById("passw").value;
 
+
     var userArray = JSON.parse(localStorage.getItem("lUserArray"));
 
     if (user !== null && user !== "") {
@@ -16,17 +17,17 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
+                window.location.href = "http://localhost:5000/dashboard";
                 //window.location.href = "http://heroku:5000/dashboard";
             } else {
-                alert("user or password are not correct");
+                alert("La contraseña o el usuario no es correcto");
             }
 
         } else {
-            alert("password must not be empty");
+            alert("La contraseña no puede ser vacia");
         }
     } else {
-        alert("user must not be empty");
+        alert("El usuario no puede ser vacio");
     }
 
 }
@@ -78,7 +79,7 @@ function createSessionUser(user, password, role) {
 function registerNewUser() {
     var reg_user = document.getElementById("user_reg").value;
     var reg_password = document.getElementById("passw_reg").value;
-    var reg_role = "client";
+    var reg_role = document.getElementById("role_reg").value
 
     //alert(reg_user);
     var userArray = [];
@@ -97,7 +98,7 @@ function registerNewUser() {
 
     localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
-    window.location.href = "https://registro-medico.herokuapp.com/login"
+    window.location.href = "http://localhost:5000/login"
     //window.location.href = "http://heroku:5000/login";
 }
 
@@ -127,7 +128,7 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "https://registro-medico.herokuapp.com/login"
+        window.location.href = "http://localhost:5000/login"
         //window.location.href = "http://heroku:5000/login";
     }
 }
@@ -138,7 +139,7 @@ function setUserNameOnDashboard() {
     var currentRole = userArray.role
 
     var userSpan = document.getElementById("user")
-    userSpan.innerText = "Hello, " + currentRole + " " + currentUser
+    userSpan.innerText = "Hola, " + currentRole + " " + currentUser + ", bienvenido/a a tu perfil de citas médicas en línea"
 
     modifyDashboardForRole(currentRole)
 }
@@ -162,26 +163,18 @@ function modifyDashboardForRole(pCurrentRole) {
     }
 }
 
+
+
+
 function logout() {
     sessionStorage.removeItem("loggedUser")
-    window.location.href = "https://registro-medico.herokuapp.com/"
+    window.location.href = "http://localhost:5000/"
     //window.location.href = "http://heroku:5000/";
 }
 
-function initialForm() {
-    window.location.href = "https://registro-medico.herokuapp.com/initialForm"
-    //window.location.href = "http://heroku:5000/";
-}
 
-function cataloge() {
-    window.location.href = "https://registro-medico.herokuapp.com/cataloge"
-    //window.location.href = "http://heroku:5000/";
-}
 
-function appointment() {
-    window.location.href = "https://registro-medico.herokuapp.com/appointment"
-    //window.location.href = "http://heroku:5000/";
-}
+
 /*
 ************* dashboard functionality end
 */
@@ -236,13 +229,12 @@ function loadAddDataFromAllUsers() {
 */
 
 function add() {
-    var date1 = document.getElementById("date").value
+    var date1 = document.getElementById("date1").value
     var doctors = document.getElementById("doctores").value
     var especialidad = document.getElementById("especialidad").value
     var reason = document.getElementById("reason").value
 
     cleanForm()
-    addResultToTable(date1, doctors, especialidad, reason)
     addResultToStorage(date1, doctors, especialidad, reason)
 
 }
@@ -255,15 +247,20 @@ function cleanForm() {
     var reason = document.getElementById("reason").value = ""
 }
 
-function addResultToTable(pDate, pDoctors, pEspecialidad, pReason) {
-    var myTable = document.getElementById("userTableClient")
+function addResultToTable() {
+    var table = document.getElementById("userTableClient");
+    var retrievedApp = JSON.parse(localStorage.getItem("lAddResultArray"));
 
-    var row = myTable.insertRow(1)
+    
+    for (var i = 0; i < retrievedApp.length; i++) {
+        var row = table.insertRow(1)
+        
 
-    row.insertCell(0).innerHTML = pDate;
-    row.insertCell(1).innerHTML = pDoctors;
-    row.insertCell(2).innerHTML = pEspecialidad;
-    row.insertCell(3).innerHTML = pReason;
+        row.insertCell(0).innerHTML = retrievedApp[i].date1;
+        row.insertCell(1).innerHTML = retrievedApp[i].doctors;
+        row.insertCell(2).innerHTML = retrievedApp[i].especialidad;
+        row.insertCell(3).innerHTML = retrievedApp[i].reason;
+    }
 }
 
 function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
@@ -274,14 +271,98 @@ function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
     }
 
     var current_add_result = {
-        date1: pNum1,
-        doctors: pNum2,
-        especialidad: pResult,
+        date1: pDate,
+        doctors: pDoctors,
+        especialidad: pEspecialidad,
         reason: pReason
     }
 
     addResultArray.push(current_add_result)
     localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray));
+
+    addResultToTable()
+    
+}
+/*
+************* bloquear doctores que no se usan
+*/
+
+function showDiv() {
+    var especialidad = document.getElementById("especialidad").value
+
+    if (especialidad == "General") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dra. Meredith Grey">Dra. Meredith Grey</option>
+        <option value="Dra. Miranda Bailey">Dra. Miranda Bailey</option>
+        <option value="Dr. Richard Webber">Dr. Richard Webber</option>
+        </select>
+        `;
+
+    } if (especialidad == "Neurología") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dr. Derek Shepherd">Dr. Derek Shepherd</option>
+        <option value="Dra. Lexie Grey">Dra. Lexie Grey</option>
+        <option value="Dra. Amelia Shepherd">Dra. Amelia Shepherd</option>
+        </select>
+        `;
+
+    } if (especialidad == "Cardiología") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dra. Cristina Yang">Dra. Cristina Yang</option>
+        <option value="Dr. Preston Burke">Dr. Preston Burke</option>
+        <option value="Dra. Erica Hahn">Dra. Erica Hahn</option>
+        </select>
+        `;
+
+    } if (especialidad == "Pediatría") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dr. Alex Karev">Dr. Alex Karev</option>
+        <option value="Dra. Arizona Robbins">Dra. Arizona Robbins</option>
+        <option value="Dr. Charles Percy">Dr. Charles Percy</option>
+        </select>
+        `;
+
+    } if (especialidad == "Trauma") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dr. Gorge O'Malley">Dr. Gorge O'Malley</option>
+        <option value="Dr. Owen Hunt">Dr. Owen Hunt</option>
+        <option value="Dra. April Kepner">Dra. April Kepner</option>
+        </select>
+        `;
+
+    } if (especialidad == "Plástica") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dr. Mark Sloan">Dr. Mark Sloan</option>
+        <option value="Dr. Jackson Avery">Dr. Jackson Avery</option>
+        <option value="Dr. Andrew Deluca">Dr. Andrew Deluca</option>
+        </select>
+        `;
+
+    } if (especialidad == "Ortopedia") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dra. Calliope Torres">Dra. Calliope Torres</option>
+        <option value="Dra. Isobel Stevens">Dra. Isobel Stevens</option>
+        <option value="Dr. Ben Warren">Dr. Ben Warren</option>
+        </select>
+        `;
+
+    } if (especialidad == "Obstetricia") {
+        document.getElementById("doctors").innerHTML = `
+        <select name="doctores" id="doctores">
+        <option value="Dra. Addison Montgomery">Dra. Addison Montgomery</option>
+        <option value="Dra. Stephanie Edwards">Dra. Stephanie Edwards</option>
+        <option value="Dra. Joe Willson">Dra. Joe Willson</option>
+        </select>
+        `;
+
+    }
 }
 
 /*

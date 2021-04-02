@@ -1,7 +1,17 @@
 <div>
-    <h1>Grey-Sloan Memorial</h1>
 
-    <h2>Catálogo Médico</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>dashboard</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+
+    </head>
+    <h1>Catálogo médico</h1>
+
+    <h2>Especialidades</h2>
 
     <!-- Botones de filtro -->
     <div id="myBtnContainer">
@@ -21,6 +31,8 @@
     <div class="row">
 
         <!-- Sección de cirugia general -->
+
+
         <div class="column general">
             <div class="content">
                 <h3>General</h3>
@@ -28,19 +40,19 @@
         </div>
         <div class="column general">
             <div class="content">
-                <img src="IMG/Mer.jpg" alt="Mer" style="width:65%">
+                <img src="/static/images/Mer.jpg" alt="Mer" style="width:100%">
                 <h4>Dra. Meredith Grey</h4>
             </div>
         </div>
         <div class="column general">
             <div class="content">
-                <img src="IMG/Bailey.jpg" alt="Bailey" style="width:65%">
+                <img src="/static/images/Bailey.jpg" alt="Bailey" style="width:100%">
                 <h4>Dra. Miranda Bailey</h4>
             </div>
         </div>
         <div class="column general">
             <div class="content">
-                <img src="IMG/Webber.jpg" alt="Webber" style="width:73%">
+                <img src="/static/images/Webber.jpg" alt="Webber" style="width:100%">
                 <h4>Dr. Richard Webber</h4>
             </div>
         </div>
@@ -53,19 +65,19 @@
         </div>
         <div class="column neurologia">
             <div class="content">
-                <img src="IMG/Derek.jpg" alt="Derek" style="width:65%">
+                <img src="/static/images/Derek.jpg" alt="Derek" style="width:100%">
                 <h4>Dr. Derek Shepherd</h4>
             </div>
         </div>
         <div class="column neurologia">
             <div class="content">
-                <img src="IMG/Lexie.png" alt="Lexie" style="width:95%">
+                <img src="/static/images/Lexie.png" alt="Lexie" style="width:100%">
                 <h4>Dra. Lexie Grey</h4>
             </div>
         </div>
         <div class="column neurologia">
             <div class="content">
-                <img src="IMG/Amelia.jpg" alt="Amelia" style="width:95%">
+                <img src="/static/images/Amelia.jpg" alt="Amelia" style="width:100%">
                 <h4>Dra. Amelia Shepherd</h4>
             </div>
         </div>
@@ -78,19 +90,19 @@
         </div>
         <div class="column cardiologia">
             <div class="content">
-                <img src="IMG/Yang.jpg" alt="Yang" style="width:95%">
+                <img src="/static/images/Yang.jpg" alt="Yang" style="width:100%">
                 <h4>Dra. Cristina Yang</h4>
             </div>
         </div>
         <div class="column cardiologia">
             <div class="content">
-                <img src="IMG/Burke.jpg" alt="Burke" style="width:65%">
+                <img src="/static/images/Burke.jpg" alt="Burke" style="width:100%">
                 <h4>Dr. Preston Burke</h4>
             </div>
         </div>
         <div class="column cardiologia">
             <div class="content">
-                <img src="IMG/Hahn.jpg" alt="Hahn" style="width:65%">
+                <img src="/static/images/Hahn.jpg" alt="Hahn" style="width:100%">
                 <h4>Dra. Erica Hahn</h4>
             </div>
         </div>
@@ -103,16 +115,23 @@
         </div>
         <div class="column pediatria">
             <div class="content">
-                <img src="IMG/Alex.jpg" alt="Alex" style="width:65%">
+                <img src="/static/images/Alex.jpg" alt="Alex" style="width:100%">
                 <h4>Dr. Alex Karev</h4>
             </div>
         </div>
         <div class="column pediatria">
             <div class="content">
-                <img src="IMG/Arizona.png" alt="Arizona" style="width:65%">
+                <img src="/static/images/Arizona.png" alt="Arizona" style="width:100%">
                 <h4>Dra. Arizona Robbins</h4>
             </div>
         </div>
+        <div class="column pediatria">
+            <div class="content">
+                <img src="static/images/Percy.jpg" alt="Percy" style="width:100%">
+                <h4>Dr. Charles Percy</h4>
+            </div>
+        </div>
+
 
         <!-- seccion de trauma-->
         <div class="column trauma">
@@ -122,19 +141,19 @@
         </div>
         <div class="column trauma">
             <div class="content">
-                <img src="IMG/George.jpg" alt="George" style="width:65%">
+                <img src="/static/images/George.jpg" alt="George" style="width:100%">
                 <h4>Dr. Gorge O'Malley</h4>
             </div>
         </div>
         <div class="column trauma">
             <div class="content">
-                <img src="IMG/Owen.jpg" alt="Owen" style="width:65%">
+                <img src="/static/images/Owen.jpg" alt="Owen" style="width:100%">
                 <h4>Dr. Owen Hunt</h4>
             </div>
         </div>
         <div class="column trauma">
             <div class="content">
-                <img src="IMG/April.jpg" alt="April" style="width:65%">
+                <img src="/static/images/April.jpg" alt="April" style="width:100%">
                 <h4>Dra. April Kepner</h4>
             </div>
         </div>
@@ -147,14 +166,20 @@
         </div>
         <div class="column plastica">
             <div class="content">
-                <img src="IMG/Mark" alt="Mark" style="width:65%">
+                <img src="/static/images/Mark.jpg" alt="Mark" style="width:100%">
                 <h4>Dr. Mark Sloan</h4>
             </div>
         </div>
         <div class="column plastica">
             <div class="content">
-                <img src="IMG/Jackson.jpg" alt="Jackson" style="width:65%">
+                <img src="/static/images/Jackson.jpg" alt="Jackson" style="width:100%">
                 <h4>Dr. Jackson Avery</h4>
+            </div>
+        </div>
+        <div class="column plastica">
+            <div class="content">
+                <img src="static/images/Deluca.jpg" alt="Deluca" style="width:100%">
+                <h4>Dr. Andrew Deluca</h4>
             </div>
         </div>
 
@@ -166,14 +191,20 @@
         </div>
         <div class="column ortopedia">
             <div class="content">
-                <img src="IMG/Calli.jpg" alt="Calli" style="width:65%">
+                <img src="/static/images/Calli.jpg" alt="Calli" style="width:100%">
                 <h4>Dra. Calliope Torres</h4>
             </div>
         </div>
         <div class="column ortopedia">
             <div class="content">
-                <img src="IMG/Izzy.jpg" alt="Izzy" style="width:65%">
+                <img src="/static/images/Izzy.jpg" alt="Izzy" style="width:100%">
                 <h4>Dra. Isobel Stevens</h4>
+            </div>
+        </div>
+        <div class="column ortopedia">
+            <div class="content">
+                <img src="static/images/Ben.jpg" alt="Ben" style="width:100%">
+                <h4>Dr. Ben Warren</h4>
             </div>
         </div>
 
@@ -185,9 +216,26 @@
         </div>
         <div class="column obstetricia">
             <div class="content">
-                <img src="IMG/Addison.jpg" alt="Addison" style="width:65%">
+                <img src="/static/images/Addison.jpg" alt="Addison" style="width:100%">
                 <h4>Dra. Addison Montgomery</h4>
             </div>
         </div>
+        <div class="column obstetricia">
+            <div class="content">
+                <img src="static/images/Edwards.jpg" alt="Edwards" style="width:100%">
+                <h4>Dra. Stephanie Edwards</h4>
+            </div>
+        </div>
+        <div class="column obstetricia">
+            <div class="content">
+                <img src="static/images/Jo.jpg" alt="Jo" style="width:100%">
+                <h4>Dra. Joe Willson</h4>
+            </div>
+        </div>
     </div>
+
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="{{url_for('static', filename='cataloge.js')}}"></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
 </div>

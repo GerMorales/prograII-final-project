@@ -11,19 +11,29 @@
 </head>
 
 <body>
+    <h1>Crea un perfil</h1>
+    <hr>
     <div class="container">
-        <h2>registration form</h2>
-        <label for="user_reg">user</label>
-        <input type="text" name="user" id="user_reg" placeholder="user...">
-        <label for="passw_reg">password</label>
-        <input type="text" name="passw" id="passw_reg" placeholder="password...">
-        <button onclick="registerNewUser()">register</button>
+        <h2>Regristrarse</h2>
+        <label for="user_reg">Usuario</label>
+        <input type="text" name="user" id="user_reg" placeholder="usuario...">
+        <br><br>
+        <label for="passw_reg">Contraseña</label>
+        <input type="password" name="passw" id="passw_reg" placeholder="contraseña...">
+        <br><br>
+        <label for="role_reg">Rol</label>
+        <select name="role" id="role_reg">
+            <option value="client">Cliente</option>
+            <option value="admin">Administrador</option>
+        </select>
+        <br><br>
+        <button onclick="registerNewUser()">Registrarse</button>
     </div>
-
+    <hr>
     <br>
 
     <div>
-        <a href="{{url_for('login')}}">go to login</a>
+        <a href="{{url_for('login')}}">Iniciar sesión</a>
     </div>
 
     <script src="{{url_for('static', filename='script.js')}}"></script>

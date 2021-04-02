@@ -1,85 +1,90 @@
 
+       <!DOCTYPE html>
+       <html lang="en">
+       <head>
+         <meta charset="UTF-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Document</title>
 
-    <!---
-    <h1>Hacer cita </h1>
-    <br>
-
-    <label for="date">Fecha de la cita</label>
-    <input type="date" name="date1" id="date" placeholder="inserte una fecha....">
-    <br><br>
-    <label for="doctores">Doctores</label>
-    <select name="doctores" id="doctores">
-        <option value="Dr. Greys">Dr. Greys</option>
-        <option value="Dr. House">Dr. House</option>
-    </select>
-    <br><br>
-    <label for="especialidad">Especialidad:</label>
-    <select name="especialidad" id="especialidad">
-        <option value="Neurología">Neurología</option>
-        <option value="Odontología">Odontología</option>
-        <option value="Pediatría">Pediatría</option>
-    </select>
-    <br><br>
-    <label for="reason">Motivo:</label>
-    <input type="text" name="reason1" id="reason" placeholder="Describa el motivo de su consulta...">
-    <br><br>
-
-    <button onclick="add()">add</button>
-    <br>
-    <br>
-       -->
-    
-       <div>
-       <style>
-       ul {
-         list-style-type: none;
-         margin: 0;
-         padding: 0;
-         overflow: hidden;
-         background-color: #333333;
-       }
-       
-       li {
-         float: left;
-       }
-       
-       li a {
-         display: block;
-         color: white;
-         text-align: center;
-         padding: 16px;
-         text-decoration: none;
-       }
-       
-       li a:hover {
-         background-color: #111111;
-       }
-       </style>
+         <style>
+          ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+          }
+          
+          li {
+            float: left;
+          }
+          
+          li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+          }
+          
+          li a:hover {
+            background-color: #111111;
+          }
+          </style>
+          
        </head>
        <body>
-       
-       <ul>
-         <li><a href="https://registro-medico.herokuapp.com/initialForm">Formulario inicial</a></li>
-         <li><a href="https://registro-medico.herokuapp.com/cataloge">Catalogo medico</a></li>
-         <li><a href="https://registro-medico.herokuapp.com/appointment">Agendar cita</a></li>
+        <ul>
+          <li><a  href="#formI">Formulario inicial</a></li>
+          <li><a  href="#cat">Catálogo médico</a></li>
+          <li><a  href="#appoint">Agendar cita</a></li>
+          <li><a onclick="logout()" href="">Cerrar sesion</a></li>
+        </ul>
         
-       </ul>
-       
+        <br>
+              <div id="formI" style="display:block;" name="w3includes" w3-include-html="http://localhost:5000/initialForm">
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div id="cat" style="display:block;" name="w3includes" w3-include-html="http://localhost:5000/cataloge">
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div id="appoint" style="display:block;" name="w3includes" w3-include-html="http://localhost:5000/appointment">
+          </div>
+    
+      <!---
+        <div>
+            <a onclick="logout()" href="">Cerrar sesion</a>
+        </div>
+      -->
+        
+ 
+     <br>
+     <br>
+     <br>
+     
+     <!--
+     <table id="userTableClient" style="width:50%" border="1">
+         <tr>
+ 
+             <th>Fecha cita</th>
+             <th>Doctor</th>
+             <th>Especialidad</th>
+             <th>Motivo</th>
+         </tr>
+     </table>
+     -->
+ 
+     <script src="https://www.w3schools.com/lib/w3.js"></script>
+     <script src="{{url_for('static', filename='script.js')}}"></script>
+     <script src="{{url_for('static', filename='cataloge.js')}}"></script>
+         
        </body>
        </html>
-
-
-    <br>
-    <br>
-    <br>
-    
-    <table id="userTableClient" style="width:50%" border="1">
-        <tr>
-
-            <th>Fecha cita</th>
-            <th>Doctor</th>
-            <th>Especialidad</th>
-            <th>Motivo</th>
-        </tr>
-    </table>
-  </div>
+       
+       
+       
