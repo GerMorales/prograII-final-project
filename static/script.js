@@ -163,9 +163,6 @@ function modifyDashboardForRole(pCurrentRole) {
     }
 }
 
-
-
-
 function logout() {
     sessionStorage.removeItem("loggedUser")
     window.location.href = "http://localhost:5000/"
@@ -181,6 +178,7 @@ function logout() {
 
 /*
 ************* dashboard functionality add admin
+Aquí volví a copiar lo que Balbino había hecho dado que estaba desactualizado.
 */
 if (window.location.href.includes("dashboard")) {
     var currentLoggedUser = getCurrentLoggedUser()
@@ -206,6 +204,8 @@ function loadAddDataFromAllUsers() {
 
     var userTableAdmin = document.getElementById("userTableAdmin")
     var row
+    var index = 0;
+    //var tableIndex = addResultArray
 
     for (var addResult of addResultArray) {
         row = userTableAdmin.insertRow(1)
@@ -214,10 +214,56 @@ function loadAddDataFromAllUsers() {
         row.insertCell(1).innerHTML = addResult.num1;
         row.insertCell(2).innerHTML = addResult.num2;
         row.insertCell(3).innerHTML = addResult.result;
-        row.insertCell(4).innerHTML = "<a>modify</a>";
-        row.insertCell(5).innerHTML = "<a>delete</a>";
+        row.insertCell(4).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
+        row.insertCell(5).innerHTML = "<button onclick='deleteElementByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
+        index++
     }
 }
+
+function deleteElementByIndex(pIndex) {
+    //que es lo que implica eliminar un elemento?
+    //1. quitarlo del local storage
+    deleteElementFromLocalStorage(pIndex)
+    //2. quitarlo de la tabla
+    deleteElementFromTable(pIndex)
+
+}
+
+function deleteElementFromLocalStorage(pIndex) {
+    var addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"))
+    addResultArray.splice(pIndex, 1)
+    localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray))
+}
+
+function deleteElementFromTable(pIndex) {
+    var element = document.getElementById(pIndex)
+    var parent = getElementParent(element, 3)
+    var child = getElementParent(element, 2)
+    parent.removeChild(child)
+}
+
+function modifyOnElementByIndex(pIndex) {
+    var element = document.getElementById(pIndex)
+    var parent = getElementParent(element, 2)
+    console.log(parent.children)
+    var children = parent.children
+    children[1].innerHTML = "<input type='number' id='inpNum" + pIndex + "' value='" + children[1].innerText + "'>"
+    children[2].innerHTML = "<input type='number' id='inpNum" + pIndex + "' value='" + children[2].innerText + "'>"
+    children[4].innerHTML = "<button onclick='modifyOffElementByIndex(" + pIndex + ",1)'>save</button><button onclick='modifyOffElementByIndex(" + pIndex + ",0)'>modify off</button><input type='hidden' id='" + pIndex + "'>"
+}
+
+function modifyOffElementByIndex(pIndex, pSave) {
+
+}
+
+function getElementParent(pElement, pGen) {
+    var parent = pElement
+    for (var i = 0; i < pGen; i++) {
+        parent = parent.parentNode
+    }
+    return parent
+}
+
 
 /*
 ************* dashboard functionality add admin
@@ -227,6 +273,43 @@ function loadAddDataFromAllUsers() {
 /*
 ************* dashboard functionality add client
 */
+if (window.location.href.includes("dashboard")) {
+    var currentLoggedUser = getCurrentLoggedUser()
+    var currentUser = currentLoggedUser.user
+    if (currentLoggedUser.role === "client") {
+
+        const elementToObserve = document.getElementById("client")
+
+        const observer = new MutationObserver(function () {
+            loadAddDataByUser(currentUser)
+            observer.disconnect()
+        });
+
+        observer.observe(elementToObserve, { subtree: true, childList: true });
+    }
+}
+
+function loadAddDataByUser(pCurrentUser) {
+    var addResultArray
+    if (localStorage.getItem("lAddResultArray") !== null) {
+        addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
+    }
+
+    var userTableClient = document.getElementById("userTableClient")
+    var row
+
+    for (var addResult of addResultArray) {
+        if (addResult.user === pCurrentUser) {
+            row = userTableClient.insertRow(1)
+
+            row.insertCell(0).innerHTML = addResult.date1;
+            row.insertCell(1).innerHTML = addResult.doctors;
+            row.insertCell(2).innerHTML = addResult.especialidad;
+            row.insertCell(3).innerHTML = addResult.reason;
+        }
+    }
+}
+
 
 function add() {
     var date1 = document.getElementById("date1").value
@@ -235,6 +318,7 @@ function add() {
     var reason = document.getElementById("reason").value
 
     cleanForm()
+    addResultToTable(date1, doctors, especialidad, reason)
     addResultToStorage(date1, doctors, especialidad, reason)
 
 }
@@ -247,30 +331,31 @@ function cleanForm() {
     var reason = document.getElementById("reason").value = ""
 }
 
-function addResultToTable() {
+function addResultToTable(pDate, pDoctors, pEspecialidad, pReason) {
     var table = document.getElementById("userTableClient");
-    var retrievedApp = JSON.parse(localStorage.getItem("lAddResultArray"));
-
     
-    for (var i = 0; i < retrievedApp.length; i++) {
-        var row = table.insertRow(1)
+    var row = table.insertRow(1)
         
-
-        row.insertCell(0).innerHTML = retrievedApp[i].date1;
-        row.insertCell(1).innerHTML = retrievedApp[i].doctors;
-        row.insertCell(2).innerHTML = retrievedApp[i].especialidad;
-        row.insertCell(3).innerHTML = retrievedApp[i].reason;
-    }
+    row.insertCell(0).innerHTML = pDate;
+    row.insertCell(1).innerHTML = pDoctors;
+    row.insertCell(2).innerHTML = pEspecialidad;
+    row.insertCell(3).innerHTML = pReason;
+    
 }
 
 function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
     var addResultArray = [];
+
+    //obtener el current logged user
+    var currentLoggedUser = getCurrentLoggedUser()
+    //console.log(currentLoggedUser.user)
 
     if (localStorage.getItem("lAddResultArray") !== null) {
         addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
     }
 
     var current_add_result = {
+        user: currentLoggedUser.user,
         date1: pDate,
         doctors: pDoctors,
         especialidad: pEspecialidad,
@@ -280,8 +365,6 @@ function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
     addResultArray.push(current_add_result)
     localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray));
 
-    addResultToTable()
-    
 }
 /*
 ************* bloquear doctores que no se usan
