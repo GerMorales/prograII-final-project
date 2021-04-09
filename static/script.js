@@ -268,7 +268,6 @@ function cleanFormInitial() {
     var datebirth = document.getElementById("datebirth").value = ""
     var sex = document.getElementById("sex").value = ""
     var civil = document.getElementById("civil").value = ""
-    var cp = document.getElementById("cp").value = ""
     var tel = document.getElementById("tel").value = ""
     var cel = document.getElementById("cel").value = ""
     var mail = document.getElementById("mail").value = ""
