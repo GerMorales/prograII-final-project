@@ -227,6 +227,7 @@ function initialForm() {
     
     
         addFormToStorage(date, name, address, datebirth, sex, civil, tel, cel, mail)
+        cleanFormInitial()
 }
 
 function addFormToStorage(pDate, pName, pAddress, pDateBirth, pSex, pCivil, pTel, pCel, pMail) {
@@ -259,6 +260,21 @@ function addFormToStorage(pDate, pName, pAddress, pDateBirth, pSex, pCivil, pTel
         localStorage.setItem("lInitialFormArray", JSON.stringify(initialFormArray));
     
 }
+function cleanFormInitial() {
+
+    var date = document.getElementById("date").value = ""
+    var name = document.getElementById("name").value = ""
+    var address = document.getElementById("address").value = ""
+    var datebirth = document.getElementById("datebirth").value = ""
+    var sex = document.getElementById("sex").value = ""
+    var civil = document.getElementById("civil").value = ""
+    var cp = document.getElementById("cp").value = ""
+    var tel = document.getElementById("tel").value = ""
+    var cel = document.getElementById("cel").value = ""
+    var mail = document.getElementById("mail").value = ""
+
+}
+
 
 function add() {
     var date1 = document.getElementById("date1").value
