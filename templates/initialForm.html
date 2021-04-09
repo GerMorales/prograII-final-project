@@ -1,71 +1,58 @@
 <div id="form">
     
         <h1>Formulario Inicial</h1>
+        <p>En "Un doc para usted" velamos siempre por 
+            su bienestar y buscamos la mejor manera para 
+            servirle. A continuación, se presentará un formulario 
+            el cual deberá ser llenado con sus datos personales con 
+            el fin de ser registrado en nuestra clínica y de esta forma 
+            atenderlo como usted merece.</p>
+        <b>Si necesita actualizar su información, por favor llenar el formulario nuevamente</b>
         <center>
-        <form action="#">
-            <p>Fecha:
-                <input type="date" name="date" id="date">
-            </p>
-        </form>
-        <!--
-        <style type="text/css">
-            fieldset.inline {
-                display: inline;
-                text-align: center;
-                background-color: #2A9CBF;
-                border-color: black;
-                width: 25%;
-                height: 50%;
-                font-size: 14pt;
-            }
-
-            legend {
-                font-size: 20pt;
-                font-weight: bold;
-            }
-
-            .submit {
-                height: 50px;
-                width: 100px;
-            }
-        </style>
-        -->
-        <fieldset class="inline">
-            <legend>Detalles de Paciente:</legend>
-            <label>Nombre:<br />
-                <input type="text" name="name" placeholder="Incluir nombre y apellido" /></label><br />
-            <label>Dirección:<br />
-                <input type="text" name="address" /></label>
-        </fieldset>
-        <br>
-        <fieldset class="inline">
-            <legend>Referencias:</legend>
-            <label>Fecha de nacimiento:<br />
-                <input type="date" name="datebirth" id="datebirth" /></label><br />
+        <div class="form" id="form01">
+            <form action="#">
+                <p>Fecha:
+                    <input type="date" name="date" id="date">
+                </p>
+            </form>
+            
+            <fieldset class="inline">
+                <legend>Detalles de Paciente:</legend>
+                <label>Nombre:<br />
+                    <input type="text" name="name" id="name" placeholder="Incluir nombre y apellido" /></label><br />
+                <label>Dirección:<br />
+                    <input type="text" name="address" id="address" /></label>
+            </fieldset>
             <br>
-            <label>Sexo:</label>
-            <input id="female" type="radio" name="gender" value="f">
-            <label for="female">Femenino</label>
-            <input id="male" type="radio" name="gender" value="m">
-            <label for="male">Masculino</label><br>
+            <fieldset class="inline">
+                <legend>Referencias:</legend>
+                <label>Fecha de nacimiento:<br />
+                    <input type="date" name="datebirth" id="datebirth" /></label><br />
+                <br>
+                <label for="sex">Sexo:</label>
+                <select name="sex" id="sex">
+                <option value="" selected disabled hidden>Seleccione sexo...</option>
+                <option value="masculine">Masculino</option>
+                <option value="femenine">Femenino</option>
+                </select>
+                <br>
+                <br>
+                <label>Estado Civil:<br/>
+                    <input type="text" name="state" id="civil" /></label><br/>
+                <label>CP:<br />
+                    <input type="text" name="cp" id="cp" /></label><br />
+                <label>Teléfono:<br />
+                    <input type="text" name="telephone" id="tel"/></label><br />
+                <label>Celular:<br />
+                    <input type="text" name="cellphone" id="cel" /></label><br />
+                <label>Correo:<br />
+                    <input type="text" name="mail" id="mail"/></label><br />
+            </fieldset>
             <br>
-            <label>Estado Civil:<br />
-                <input type="text" name="state" /></label><br />
-            <label>CP:<br />
-                <input type="text" name="cp" /></label><br />
-            <label>Teléfono:<br />
-                <input type="text" name="telephone" /></label><br />
-            <label>Celular:<br />
-                <input type="text" name="cellphone" /></label><br />
-            <label>Correo:<br />
-                <input type="text" name="mail" /></label><br />
-        </fieldset>
-        <br>
-        <br>
-        <form class="submit" action="#">
-            <input type="submit" value="Enviar">
-        </form>
-        
+            <br>
+            <button onclick="initialForm()">Enviar formulario de registro</button>
+        </div>
         </center>
     
+    <script src="{{url_for('static', filename='script.js')}}"></script>
 </div>

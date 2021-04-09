@@ -5,6 +5,12 @@
     <label for="date1">Fecha de la cita</label>
     <input type="date" name="date" id="date1" placeholder="inserte una fecha....">
     <br><br>
+
+    <label for="hour">Hora de la cita</label>
+    <input type="time" name="hour" id="hour" min="09:00" max="18:00">
+    <small>Nuestros horarios de atención son: 9:00-18:00 hrs</small>
+    <br><br>
+
     <label for="especialidad">Especialidad:</label>
     <select name="especialidad" id="especialidad" onchange="showDiv()">
         <option value="" selected disabled hidden>Especialidad...</option>
@@ -24,7 +30,7 @@
     </div>
 
     <br><br>
-    <label for="reason">Motivo:</label>
+    <label for="reason">Motivo</label>
     <input type="text" name="reason1" id="reason" placeholder="Describa el motivo de su consulta...">
     <br><br>
 
@@ -32,10 +38,11 @@
     <br>
     <br>
 
-    <table id="userTableClient" style="width:50%" border="1">
+    <table id="userTableClient" style="width:75%" border="1">
         <tr>
 
             <th>Fecha cita</th>
+            <th>Hora cita</th>
             <th>Doctor</th>
             <th>Especialidad</th>
             <th>Motivo</th>

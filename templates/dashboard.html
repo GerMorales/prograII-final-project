@@ -8,20 +8,20 @@
     <title>dashboard</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 
-  
+
 </head>
 
 <body>
-    
-    
+
+
     <h1>dashboard</h1>
-    
+
     <div>
         <span id="user"></span>
     </div>
     <br>
 
-<!--
+    <!--
     <div>
         <a onclick="logout()" href="">Cerrar sesion</a>
     </div>
@@ -32,15 +32,15 @@
     <div class="main">
 
         <div class="main__section" id="main_section">
-            <div style="display:block" id="client" name="w3includes" w3-include-html="http://localhost:5000/add_client">
+            <div style="display:block" id="client" name="w3includes" w3-include-html="https://registro-medico.herokuapp.com/add_client">
             </div>
-            <div style="display:block" id="admin" name="w3includes" w3-include-html="http://localhost:5000/add_adm">
+            <div style="display:block" id="admin" name="w3includes" w3-include-html="https://registro-medico.herokuapp.com/add_adm">
             </div>
         </div>
 
     </div>
 
-  
+
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="{{url_for('static', filename='script.js')}}"></script>

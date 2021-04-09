@@ -17,8 +17,7 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "http://localhost:5000/dashboard";
-                //window.location.href = "http://heroku:5000/dashboard";
+                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
             } else {
                 alert("La contraseña o el usuario no es correcto");
             }
@@ -98,8 +97,7 @@ function registerNewUser() {
 
     localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
-    window.location.href = "http://localhost:5000/login"
-    //window.location.href = "http://heroku:5000/login";
+    window.location.href = "https://registro-medico.herokuapp.com/login"
 }
 
 /*
@@ -128,8 +126,7 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "http://localhost:5000/login"
-        //window.location.href = "http://heroku:5000/login";
+        window.location.href = "https://registro-medico.herokuapp.com/login"
     }
 }
 
@@ -165,8 +162,7 @@ function modifyDashboardForRole(pCurrentRole) {
 
 function logout() {
     sessionStorage.removeItem("loggedUser")
-    window.location.href = "http://localhost:5000/"
-    //window.location.href = "http://heroku:5000/";
+    window.location.href = "https://registro-medico.herokuapp.com/"
 }
 
 
@@ -211,11 +207,13 @@ function loadAddDataFromAllUsers() {
         row = userTableAdmin.insertRow(1)
 
         row.insertCell(0).innerHTML = addResult.user;
-        row.insertCell(1).innerHTML = addResult.num1;
-        row.insertCell(2).innerHTML = addResult.num2;
-        row.insertCell(3).innerHTML = addResult.result;
-        row.insertCell(4).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
-        row.insertCell(5).innerHTML = "<button onclick='deleteElementByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
+        row.insertCell(1).innerHTML = addResult.date1;
+        row.insertCell(2).innerHTML = addResult.hour;
+        row.insertCell(3).innerHTML = addResult.doctors;
+        row.insertCell(4).innerHTML = addResult.especialidad;
+        row.insertCell(5).innerHTML = addResult.reason;
+        row.insertCell(6).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
+        row.insertCell(7).innerHTML = "<button onclick='deleteElementByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
         index++
     }
 }
@@ -291,6 +289,7 @@ if (window.location.href.includes("dashboard")) {
 
 function loadAddDataByUser(pCurrentUser) {
     var addResultArray
+
     if (localStorage.getItem("lAddResultArray") !== null) {
         addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
     }
@@ -303,9 +302,10 @@ function loadAddDataByUser(pCurrentUser) {
             row = userTableClient.insertRow(1)
 
             row.insertCell(0).innerHTML = addResult.date1;
-            row.insertCell(1).innerHTML = addResult.doctors;
-            row.insertCell(2).innerHTML = addResult.especialidad;
-            row.insertCell(3).innerHTML = addResult.reason;
+            row.insertCell(1).innerHTML = addResult.hour;
+            row.insertCell(2).innerHTML = addResult.doctors;
+            row.insertCell(3).innerHTML = addResult.especialidad;
+            row.insertCell(4).innerHTML = addResult.reason;
         }
     }
 }
@@ -313,37 +313,40 @@ function loadAddDataByUser(pCurrentUser) {
 
 function add() {
     var date1 = document.getElementById("date1").value
+    var hour = document.getElementById("hour").value
     var doctors = document.getElementById("doctores").value
     var especialidad = document.getElementById("especialidad").value
     var reason = document.getElementById("reason").value
 
     cleanForm()
-    addResultToTable(date1, doctors, especialidad, reason)
-    addResultToStorage(date1, doctors, especialidad, reason)
+    addResultToTable(date1, hour, doctors, especialidad, reason)
+    addResultToStorage(date1, hour, doctors, especialidad, reason)
 
 }
 //
 function cleanForm() {
 
     var date1 = document.getElementById("date").value = ""
+    var hour = document.getElementById("hour").value = ""
     var doctors = document.getElementById("doctores").value = ""
     var especialidad = document.getElementById("especialidad").value = ""
     var reason = document.getElementById("reason").value = ""
 }
 
-function addResultToTable(pDate, pDoctors, pEspecialidad, pReason) {
+function addResultToTable(pDate, pHour, pDoctors, pEspecialidad, pReason) {
     var table = document.getElementById("userTableClient");
     
     var row = table.insertRow(1)
         
     row.insertCell(0).innerHTML = pDate;
-    row.insertCell(1).innerHTML = pDoctors;
-    row.insertCell(2).innerHTML = pEspecialidad;
-    row.insertCell(3).innerHTML = pReason;
+    row.insertCell(1).innerHTML = pHour
+    row.insertCell(2).innerHTML = pDoctors;
+    row.insertCell(3).innerHTML = pEspecialidad;
+    row.insertCell(4).innerHTML = pReason;
     
 }
 
-function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
+function addResultToStorage(pDate, pHour, pDoctors, pEspecialidad, pReason) {
     var addResultArray = [];
 
     //obtener el current logged user
@@ -357,6 +360,7 @@ function addResultToStorage(pDate, pDoctors, pEspecialidad, pReason) {
     var current_add_result = {
         user: currentLoggedUser.user,
         date1: pDate,
+        hour: pHour,
         doctors: pDoctors,
         especialidad: pEspecialidad,
         reason: pReason
@@ -448,6 +452,58 @@ function showDiv() {
     }
 }
 
+/*
+************* script of initial form
+*/
+function initialForm() {
+    var date = document.getElementById("date").value
+    var name = document.getElementById("name").value
+    var address = document.getElementById("address").value
+    var datebirth = document.getElementById("datebirth").value
+    var sex = document.getElementById("sex").value
+    var civil = document.getElementById("civil").value
+    var tel = document.getElementById("tel").value
+    var cel = document.getElementById("cel").value
+    var mail = document.getElementById("mail").value
+
+
+    addFormToStorage(date, name, address, datebirth, sex, civil, tel, cel, mail)
+    document.getElementById("form01").innerHTML="Sus datos fueron guardados correctamente. Si necesita actualizar su información, por favor llene el formulario nuevamente."
+}
+//
+
+//¿poner addResultToTable? pero para tabla de administrador, pensar!!
+
+function addFormToStorage(pDate, pName, pAddress, pDateBirth, pSex, pCivil, pTel, pCel, pMail) {
+    var initialFormArray = [];
+
+    //obtener el current logged user
+    var currentLoggedUser = getCurrentLoggedUser()
+    //console.log(currentLoggedUser.user)
+
+    if (localStorage.getItem("lInitialFormArray") !== null) {
+        initialFormArray = JSON.parse(localStorage.getItem("lInitialFormArray"));
+    }
+
+    var current_form= {
+        user: currentLoggedUser.user,
+        date: pDate,
+        name: pName,
+        address: pAddress,
+        datebirth: pDateBirth,
+        sex: pSex,
+        civil: pCivil,
+        tel: pTel,
+        cel: pCel,
+        mail: pMail
+
+
+    }
+
+    initialFormArray.push(current_form)
+    localStorage.setItem("lInitialFormArray", JSON.stringify(initialFormArray));
+
+}
 /*
 ************* dashboard functionality add client
 */
