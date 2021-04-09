@@ -26,9 +26,9 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/add_client")
-def addclient():
-    return render_template("add_client.html")
+@app.route("/client")
+def client():
+    return render_template("client.html")
 
 
 @app.route("/initialForm")
@@ -46,10 +46,17 @@ def appointment():
     return render_template("appointment.html")
 
 
-@app.route("/add_adm")
-def addadm():
-    return render_template("add_adm.html")
+@app.route("/adm")
+def adm():
+    return render_template("adm.html")
 
+@app.route("/appointments")
+def appointments():
+    return render_template("appointments.html")
+
+@app.route("/patients")
+def patients():
+    return render_template("patients.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
