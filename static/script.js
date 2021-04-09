@@ -229,19 +229,19 @@ function loadDataFromAllPatients() {
     var index = 0;
     //var tableIndex = addResultArray
 
-    for (var addResult of addResultArray) {
+    for (var initialForm of initialFormArray) {
         row = patientTableAdmin.insertRow(1)
 
-        row.insertCell(0).innerHTML = initialFormArray.user;
-        row.insertCell(1).innerHTML = initialFormArray.date;
-        row.insertCell(2).innerHTML = initialFormArray.name;
-        row.insertCell(3).innerHTML = initialFormArray.address;
-        row.insertCell(4).innerHTML = initialFormArray.datebirth;
-        row.insertCell(5).innerHTML = initialFormArray.sex;
-        row.insertCell(6).innerHTML = initialFormArray.civil;
-        row.insertCell(7).innerHTML = initialFormArray.tel;
-        row.insertCell(8).innerHTML = initialFormArray.cel;
-        row.insertCell(9).innerHTML = initialFormArray.mail;
+        row.insertCell(0).innerHTML = initialForm.user;
+        row.insertCell(1).innerHTML = initialForm.date;
+        row.insertCell(2).innerHTML = initialForm.name;
+        row.insertCell(3).innerHTML = initialForm.address;
+        row.insertCell(4).innerHTML = initialForm.datebirth;
+        row.insertCell(5).innerHTML = initialForm.sex;
+        row.insertCell(6).innerHTML = initialForm.civil;
+        row.insertCell(7).innerHTML = initialForm.tel;
+        row.insertCell(8).innerHTML = initialForm.cel;
+        row.insertCell(9).innerHTML = initialForm.mail;
         row.insertCell(10).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
         row.insertCell(11).innerHTML = "<button onclick='deleteElementByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
         index++
