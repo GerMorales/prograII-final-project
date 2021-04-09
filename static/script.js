@@ -183,8 +183,9 @@ if (window.location.href.includes("dashboard")) {
 
         const observer = new MutationObserver(function () {
             var currentLoggedUser = getCurrentLoggedUser()
-            loadAppointmentsDataFromAllUsers()
             loadDataFromAllPatients()
+            loadAppointmentsDataFromAllUsers()
+            
             observer.disconnect()
         });
 
