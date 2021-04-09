@@ -7,11 +7,11 @@
             el cual deberá ser llenado con sus datos personales con 
             el fin de ser registrado en nuestra clínica y de esta forma 
             atenderlo como usted merece.</p>
-        <b>Si necesita actualizar su información, por favor llenar el formulario nuevamente</b>
+        
         <center>
         <div class="form" id="form01">
-            <form action="#">
-                <p>Fecha registro:
+            <form>
+                <p>Fecha:
                     <input type="date" name="date" id="date">
                 </p>
             </form>
@@ -51,6 +51,8 @@
             <button onclick="initialForm()">Enviar formulario de registro</button>
         </div>
         </center>
+        <br>
+        <div id="message"></div>
     
     <script src="{{url_for('static', filename='script.js')}}"></script>
 </div>

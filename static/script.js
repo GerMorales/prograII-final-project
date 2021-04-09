@@ -136,7 +136,7 @@ function setUserNameOnDashboard() {
     var currentRole = userArray.role
 
     var userSpan = document.getElementById("user")
-    userSpan.innerText = "Hola, " + currentRole + " " + currentUser + ", bienvenido/a a tu perfil de citas médicas en línea"
+    userSpan.innerText = "Hola, " + currentUser + ", bienvenido/a a tu perfil de citas médicas en línea"
 
     modifyDashboardForRole(currentRole)
 }
@@ -174,7 +174,6 @@ function logout() {
 
 /*
 ************* dashboard functionality add admin
-Aquí volví a copiar lo que Balbino había hecho dado que estaba desactualizado.
 */
 if (window.location.href.includes("dashboard")) {
     var currentLoggedUser = getCurrentLoggedUser()
@@ -487,6 +486,8 @@ function showDiv() {
 ************* script of initial form
 */
 function initialForm() {
+document.getElementById("message").innerHTML="Sus datos fueron guardados correctamente. Si necesita actualizar su información, por favor llene el formulario nuevamente."
+
     var date = document.getElementById("date").value
     var name = document.getElementById("name").value
     var address = document.getElementById("address").value
@@ -499,7 +500,6 @@ function initialForm() {
 
 
     addFormToStorage(date, name, address, datebirth, sex, civil, tel, cel, mail)
-    document.getElementById("form01").innerHTML="Sus datos fueron guardados correctamente. Si necesita actualizar su información, por favor llene el formulario nuevamente."
 }
 //
 
