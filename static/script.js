@@ -17,7 +17,7 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "https://registro-medico.herokuapp.com/";
+                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
             } else {
                 alert("La contraseña o el usuario no es correcto");
             }
