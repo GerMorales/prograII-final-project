@@ -219,7 +219,7 @@ function loadDataFromAllPatients() {
         row.insertCell(9).innerHTML = initialForm.cel;
         row.insertCell(10).innerHTML = initialForm.mail;
         row.insertCell(11).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
-        row.insertCell(12).innerHTML = "<button onclick='deleteElementByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
+        row.insertCell(12).innerHTML = "<button onclick='deleteAnswerByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
         index++
     }
 }
@@ -251,10 +251,8 @@ function loadAddDataFromAllUsers() {
 
 }
 
-
+//Deleting elements from the appointments
 function deleteElementByIndex(pIndex) {
-    //que es lo que implica eliminar un elemento?
-    //1. quitarlo del local storage
     deleteElementFromLocalStorage(pIndex)
     //2. quitarlo de la tabla
     deleteElementFromTable(pIndex)
@@ -265,6 +263,22 @@ function deleteElementFromLocalStorage(pIndex) {
     var addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"))
     addResultArray.splice(pIndex, 1)
     localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray))
+}
+
+//Deleting answers from initial form
+function deleteAnswerByIndex(pIndex) {
+    //que es lo que implica eliminar un elemento?
+    //1. quitarlo del local storage
+    deleteAnswerFromLocalStorage(pIndex)
+    //2. quitarlo de la tabla
+    deleteElementFromTable(pIndex)
+
+}
+
+function deleteAnswerFromLocalStorage(pIndex) {
+    var initialFormArray = JSON.parse(localStorage.getItem("lInitialFormArray"))
+    initialFormArray.splice(pIndex, 1)
+    localStorage.setItem("lInitialFormArray", JSON.stringify(initialFormArray))
 }
 
 function deleteElementFromTable(pIndex) {
@@ -285,7 +299,38 @@ function modifyOnElementByIndex(pIndex) {
 }
 
 function modifyOffElementByIndex(pIndex, pSave) {
+    var addResultArray
+    if (localStorage.getItem("lAddResultArray") !== null) {
+        addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
+    }
 
+    var element = document.getElementById(pIndex)
+    var parent = getElementParent(element, 2)
+    var children = parent.children
+
+    if(pSave===0){
+        //modify off
+        children[1].innerHTML = addResultArray[pIndex].num1
+        children[2].innerHTML = addResultArray[pIndex].num2
+        children[4].innerHTML = "<button onclick='modifyOnElementByIndex(" + pIndex + ")'>modify</button><input type='hidden' id='" + pIndex + "'>";
+
+    } else {
+        //save
+        var input1 = document.getElementById("inpNum1x"+pIndex).value
+        var input2 = document.getElementById("inpNum2x"+pIndex).value
+        var newResult = parseInt(input1)+parseInt(input2)
+
+        addResultArray[pIndex].num1 = input1
+        addResultArray[pIndex].num2 = input2
+        addResultArray[pIndex].result = newResult
+
+        children[1].innerHTML = input1
+        children[2].innerHTML = input2
+        children[3].innerHTML = newResult
+        children[4].innerHTML = "<button onclick='modifyOnElementByIndex(" + pIndex + ")'>modify</button><input type='hidden' id='" + pIndex + "'>";
+
+        localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray))
+    }
 }
 
 function getElementParent(pElement, pGen) {
