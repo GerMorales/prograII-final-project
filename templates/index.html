@@ -2,89 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/images/logoFinal.png" />
 </head>
 
 <body>
-    
-    
-<!-- Header -->
-<header class="w3-container w3-theme w3-padding" id="myHeader">
+
+
+  <!-- Header -->
+  <header class="w3-container w3-theme w3-padding" id="myHeader">
     <div class="w3-center">
-    <h4>CITAS MÉDICAS EN LÍNEA</h4>
-    <h1 class="w3-xxxlarge w3-animate-bottom">UN DOC PARA USTED</h1>
-    <i class="fa fa-heartbeat w3-margin-bottom " style="font-size:120px" ></i>
+      <h4>CITAS MÉDICAS EN LÍNEA</h4>
+      <h1 class="w3-xxxlarge w3-animate-bottom">UN DOC PARA USTED</h1>
+      <i class="fa fa-heartbeat w3-margin-bottom " style="font-size:120px"></i>
 
       <div class="w3-padding-32">
         <div class="container" id="login">
-            <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-black" style="font-size: small;">
+          <button class="w3-btn w3-xlarge w3-dark-blue w3-hover-light-black" style="font-size: small;">
             <a href="{{url_for('login')}}">Iniciar sesión</a>
-            </button>
+          </button>
         </div>
-        
+
       </div>
     </div>
   </header>
-  
-  <div class="w3-center">
-  <div class="w3-card w3-container" style="min-height:200px">
-  <br><br>
-  <h5>Bienvenido a la plataforma "Un doc para usted". En el siguiente sitio web, encontrará información de los distintos médicos afiliados a nuestra plataforma. 
 
-    Deposítenos su confianza y manténgase tranquilo. Nosotros nos encargamos de los trámites burocráticos de su seguro médico, laboratorios clínicos afiliados y otros servicios opcionales.
-    
-    Nuestro compromiso es con su privacidad. Toda información brindada a través de la plataforma virtual se maneja con un estricto control de seguridad. Solamente usted y su médico pueden acceder a sus datos. </h5><br>
-  </div>
+  <div class="w3-center">
+    <div class="w3-card w3-container" style="min-height:200px">
+      <br><br>
+      <h5>Bienvenido a la plataforma "Un doc para usted". En el siguiente sitio web, encontrará información de los
+        distintos médicos afiliados a nuestra plataforma.
+
+        Deposítenos su confianza y manténgase tranquilo. Nosotros nos encargamos de los trámites burocráticos de su
+        seguro médico, laboratorios clínicos afiliados y otros servicios opcionales.
+
+        Nuestro compromiso es con su privacidad. Toda información brindada a través de la plataforma virtual se maneja
+        con un estricto control de seguridad. Solamente usted y su médico pueden acceder a sus datos. </h5><br>
+    </div>
   </div>
 
 
   <div class="w3-row-padding w3-center w3-margin-top">
-  <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:460px">
-    <h3>Misión</h3><br>
-    <i class="fa fa-bullseye w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-    <p>Trabajar duro para ser </p>
-    <p>la mejor empresa de servicios </p>
-    <p>médicos, y así ganar la confianza</p>
-    <p>de nuestros clientes y colaboradores.</p>
+    <div class="w3-third">
+      <div class="w3-card w3-container" style="min-height:460px">
+        <h3>Misión</h3><br>
+        <i class="fa fa-bullseye w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>Trabajar duro para ser </p>
+        <p>la mejor empresa de servicios </p>
+        <p>médicos, y así ganar la confianza</p>
+        <p>de nuestros clientes y colaboradores.</p>
+      </div>
+    </div>
+
+    <div class="w3-third">
+      <div class="w3-card w3-container" style="min-height:460px">
+        <h3>Visión</h3><br>
+        <i class="fa fa-eye w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>Ser líderes en la conexión de </p>
+        <p>personas que necesiten de un servicio</p>
+        <p>médico especializado, con la confianza</p>
+        <p>de que su privacidad se mantiene intacta.</p>
+      </div>
+    </div>
+
+    <div class="w3-third">
+      <div class="w3-card w3-container" style="min-height:460px">
+        <h3>Valores</h3><br>
+        <i class="fa fa-diamond w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>Honestidad</p>
+        <p>Honradez</p>
+        <p>Trabajo en equipo</p>
+        <p>Transparencia</p>
+      </div>
     </div>
   </div>
-  
-  <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:460px">
-    <h3>Visión</h3><br>
-    <i class="fa fa-eye w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-    <p>Ser líderes en la conexión de   </p>
-    <p>personas que necesiten de un servicio</p>
-    <p>médico especializado, con la confianza</p>
-    <p>de que su privacidad se mantiene intacta.</p>
-    </div>
-  </div>
-  
-  <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:460px">
-    <h3>Valores</h3><br>
-    <i class="fa fa-diamond w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-    <p>Honestidad</p>
-    <p>Honradez</p>
-    <p>Trabajo en equipo</p>
-    <p>Transparencia</p>
-    </div>
-  </div>
-  </div>
-  
+
   <br>
   <br>
-  
-    <script src="{{url_for('static', filename='pre_load.js')}}"></script>
-    <script src="{{url_for('static', filename='script.js')}}"></script>
+
+  <script src="{{url_for('static', filename='pre_load.js')}}"></script>
+  <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 
 </html>

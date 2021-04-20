@@ -3,9 +3,14 @@
   }
   
   body {
+    /*background-image: url("/static/images/fondo.jpg");*/
     background-color: #f1f1f1;
     padding: 20px;
     font-family: Arial;
+  }
+
+  .body2 {
+    background-image: url("/static/images/fondo.jpg");
   }
 
   /* color btn */
@@ -19,6 +24,61 @@
   }
 
   
+  /* style conteiner */
+  .container2  {
+    position: relative;
+    vertical-align:middle;
+    margin-bottom: 80px;
+    margin-top: 80px;
+    max-width: 380px;
+    padding: 15px 75px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1); 
+  } 
+    
+    .container-h2,
+    .checkbox {
+      margin-bottom: 30px;
+  }
+
+  .checkbox {
+    font-weight: normal;
+  }
+
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .btn_sign_ { 
+    background-color: #0938d3;
+    border: none;
+    padding: 10px;
+    width: 200px;
+    border-radius:3px;
+    box-shadow: 1px 5px 20px -5px rgba(0,0,0,0.4);
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+
   /* Style the buttons */
   .btn {
     float: left;
@@ -108,6 +168,10 @@
   
   @media (max-width: 650px){
 
+    .body2 {
+      background-image: url("/static/images/fondo2.jpg");
+    }
+
     h1 {
       font-size: 40px;
       word-break: break-all;
@@ -169,6 +233,22 @@
 }
 
   @media (max-width: 500px){
+
+    .container2  {
+      position: relative;
+      vertical-align:middle;
+      margin-bottom: 80px;
+      margin-top: 80px;
+      max-width: 380px;
+      padding: 0px 20px 10px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid rgba(0,0,0,0.1); 
+    } 
+
+    .body2 {
+      background-image: url("/static/images/fondo3.jpg");
+    }
 
     h1 {
       font-size: 40px;
@@ -256,4 +336,70 @@ tr:nth-child(even){background-color: #f2f2f2}
 th {
   background-color: black;
   color: white;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  background-color:#666;
+  padding: 10px;
+  text-align: center;
+  color:#f1f1f1
+  
+}
+
+.container-footer-all{
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.info1 {
+  
+  margin-left: 80px;
+}
+
+.info2{
+
+  margin-left: 80px;
+}
+
+.info3{
+ 
+  margin-left: 80px;
+}
+
+.imgUsuario01{
+
+  width: 30%;
+  height: 80%;
+
+}
+
+.containerLogo{
+  display: flex;
+  margin-left: 150px;
+  
+}
+
+#logo01 {
+  position: relative;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  max-width: 280px;
+  padding: 0px 20px 10px;
+  margin: 0px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1); 
+} 
+
+.logo01{
+  width: 125px;
+  height: 125px;
+  margin-right: 25px;
+}
+
+.txtUser01{
+  margin-left: 150px;
 }

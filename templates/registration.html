@@ -8,32 +8,29 @@
     <title>registration</title>
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/logoFinal.png" />
 </head>
 
-<body>
-    <h1>Crea un perfil</h1>
-    <hr>
-    <div class="container">
-        <h2>Regristrarse</h2>
-        <label for="user_reg">Usuario</label>
-        <input type="text" name="user" id="user_reg" placeholder="usuario...">
-        <br><br>
-        <label for="passw_reg">Contraseña</label>
-        <input type="password" name="passw" id="passw_reg" placeholder="contraseña...">
-        <br><br>
+<body class="body2">
+    <div class="container2">
+        <h2 class="container-h2">Registrarse</h2>
+        <label for="user_reg"></label>
+        <input type="text" name="user" id="user_reg" class="form-control" placeholder="usuario...">
+        <br>
+        <label for="passw_reg"></label>
+        <input type="password" name="passw" id="passw_reg" class="form-control" placeholder="contraseña...">
+        <br>
         <label for="role_reg">Rol</label>
-        <select name="role" id="role_reg">
+        <select name="role" id="role_reg" class="form-control">
             <option value="client">Cliente</option>
             <option value="admin">Administrador</option>
         </select>
         <br><br>
-        <button onclick="registerNewUser()">Registrarse</button>
-    </div>
-    <hr>
-    <br>
-
-    <div>
-        <a href="{{url_for('login')}}">Iniciar sesión</a>
+        <button class="btn_sign_" onclick="registerNewUser()">Registrarse</button>
+        <br><br>
+        <div>
+            <a href="{{url_for('login')}}">Iniciar sesión</a>
+        </div>
     </div>
 
     <script src="{{url_for('static', filename='script.js')}}"></script>

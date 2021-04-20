@@ -45,9 +45,11 @@ def cataloge():
 def appointment():
     return render_template("appointment.html")
 
+
 @app.route("/appointments")
 def appointments():
     return render_template("appointments.html")
+
 
 @app.route("/patients")
 def patients():

@@ -1,54 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrator</title>
-    <style>
-        ul {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-          background-color: #333333;
-        }
-        
-        li {
-          float: left;
-        }
-        
-        li a {
-          display: block;
-          color: white;
-          text-align: center;
-          padding: 16px;
-          text-decoration: none;
-        }
-        
-        li a:hover {
-          background-color: #111111;
-        }
-        </style>
-        
-     </head>
-     <body>
-      <ul>
-        <li><a  href="#patients">Pacientes</a></li>
-        <li><a  href="#appts">Citas agendadas</a></li>
-        <li><a onclick="logout()" href="">Cerrar sesion</a></li>
-      </ul>
-      <p>Página en mantenimiento</p>
-      
-            <div id="patients" style="display:block;" name="w3includes" w3-include-html="https://registro-medico.herokuapp.com/patients">
-        </div>
-        <br>
-        <hr>
-        <br>
-        <div id="appts" style="display:block;" name="w3includes" w3-include-html="https://registro-medico.herokuapp.com/appointments">
-        </div>
-        
-   <script src="https://www.w3schools.com/lib/w3.js"></script>
-   <script src="{{url_for('static', filename='script.js')}}"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrator</title>
+  <style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111111;
+    }
+  </style>
+
+</head>
+
+<body>
+  <ul>
+    <li><a href="#patients">Pacientes</a></li>
+    <li><a href="#appts">Citas agendadas</a></li>
+    <li><a onclick="logout()" href="">Cerrar sesion</a></li>
+  </ul>
+
+
+  <div id="patients" style="display:block;" name="w3includes" w3-include-html="http://localhost:5000/patients">
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div id="appts" style="display:block;" name="w3includes" w3-include-html="http://localhost:5000/appointments">
+  </div>
+
+  <footer>
+    <div class="container-footer-all">
+
+      <div class="info1">
+        <img class="imgUsuario01" src="static/images/usuarios.png">
+        <div id="users"></div>
+      </div>
+
+      <div class="info2">
+        <img class="imgUsuario01" src="static/images/programador.png">
+        <div id="admins"></div>
+      </div>
+
+      <div class="info3">
+        <img class="imgUsuario01" src="static/images/clientesR.png">
+        <div id="clients"></div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
+
 </html>

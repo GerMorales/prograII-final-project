@@ -17,7 +17,7 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
+                window.location.href = "http://localhost:5000/dashboard";
             } else {
                 alert("La contraseña o el usuario no es correcto");
             }
@@ -97,7 +97,7 @@ function registerNewUser() {
 
     localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
-    window.location.href = "https://registro-medico.herokuapp.com/login"
+    window.location.href = "http://localhost:5000/login"
 }
 
 /*
@@ -126,7 +126,7 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "https://registro-medico.herokuapp.com/login"
+        window.location.href = "http://localhost:5000/login"
     }
 }
 
@@ -162,7 +162,7 @@ function modifyDashboardForRole(pCurrentRole) {
 
 function logout() {
     sessionStorage.removeItem("loggedUser")
-    window.location.href = "https://registro-medico.herokuapp.com/"
+    window.location.href = "http://localhost:5000/"
 }
 
 
@@ -186,12 +186,14 @@ if (window.location.href.includes("dashboard")) {
             var currentLoggedUser = getCurrentLoggedUser()
             loadAddDataFromAllUsers()
             loadDataFromAllPatients()
+            loadRegisteredUsers()
             observer.disconnect()
         });
 
         observer.observe(elementToObserve, { subtree: true, childList: true });
     }
 }
+
 
 function loadDataFromAllPatients() {
     var initialFormArray
@@ -218,10 +220,11 @@ function loadDataFromAllPatients() {
         row.insertCell(8).innerHTML = initialForm.tel;
         row.insertCell(9).innerHTML = initialForm.cel;
         row.insertCell(10).innerHTML = initialForm.mail;
-        row.insertCell(11).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
-        row.insertCell(12).innerHTML = "<button onclick='deleteAnswerByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
+        row.insertCell(11).innerHTML = "<button onclick='modifyOnAnswerByIndex(" + index + ")'>modificar</button><input type='hidden' id='" + index + "'>";
+        row.insertCell(12).innerHTML = "<button onclick='deleteAnswerByIndex(" + index + ")'>borrar</button><input type='hidden' id='" + index + "'>";
         index++
     }
+
 }
 
 function loadAddDataFromAllUsers() {
@@ -244,34 +247,38 @@ function loadAddDataFromAllUsers() {
         row.insertCell(3).innerHTML = addResult.doctors;
         row.insertCell(4).innerHTML = addResult.especialidad;
         row.insertCell(5).innerHTML = addResult.reason;
-        row.insertCell(6).innerHTML = "<button onclick='modifyOnElementByIndex(" + index + ")'>modify</button><input type='hidden' id='" + index + "'>";
-        row.insertCell(7).innerHTML = "<button onclick='deleteElementByIndex(" + index + ")'>delete</button><input type='hidden' id='" + index + "'>";
         index++
     }
 
 }
+function loadRegisteredUsers(){
+    var userArray
+    var registeredAdmins = 0
+    var registeredClients
+    var registeredUsers = JSON.parse(localStorage.lUserArray).length
 
-//Deleting elements from the appointments
-function deleteElementByIndex(pIndex) {
-    deleteElementFromLocalStorage(pIndex)
-    //2. quitarlo de la tabla
-    deleteElementFromTable(pIndex)
+    if (localStorage.getItem("lUserArray") !== null) {
+        userArray = JSON.parse(localStorage.getItem("lUserArray"));
+    }
 
+    for (var user of userArray) {
+        if (user.role == "admin") {
+            registeredAdmins += 1
+        }
+    }
+
+    registeredClients = registeredUsers - registeredAdmins
+    document.getElementById("users").innerHTML = "Hay "+registeredUsers+" usuarios registrados"
+    document.getElementById("admins").innerHTML = "Hay "+registeredAdmins+" administradores registrados"
+    document.getElementById("clients").innerHTML = "Hay "+registeredClients+" clientes registrados"
 }
 
-function deleteElementFromLocalStorage(pIndex) {
-    var addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"))
-    addResultArray.splice(pIndex, 1)
-    localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray))
-}
 
 //Deleting answers from initial form
 function deleteAnswerByIndex(pIndex) {
-    //que es lo que implica eliminar un elemento?
-    //1. quitarlo del local storage
     deleteAnswerFromLocalStorage(pIndex)
     //2. quitarlo de la tabla
-    deleteElementFromTable(pIndex)
+    deleteAnswerFromTable(pIndex)
 
 }
 
@@ -281,27 +288,36 @@ function deleteAnswerFromLocalStorage(pIndex) {
     localStorage.setItem("lInitialFormArray", JSON.stringify(initialFormArray))
 }
 
-function deleteElementFromTable(pIndex) {
+function deleteAnswerFromTable(pIndex) {
     var element = document.getElementById(pIndex)
     var parent = getElementParent(element, 3)
     var child = getElementParent(element, 2)
     parent.removeChild(child)
 }
 
-function modifyOnElementByIndex(pIndex) {
+function modifyOnAnswerByIndex(pIndex) {
     var element = document.getElementById(pIndex)
     var parent = getElementParent(element, 2)
     console.log(parent.children)
     var children = parent.children
-    children[1].innerHTML = "<input type='number' id='inpNum" + pIndex + "' value='" + children[1].innerText + "'>"
-    children[2].innerHTML = "<input type='number' id='inpNum" + pIndex + "' value='" + children[2].innerText + "'>"
-    children[4].innerHTML = "<button onclick='modifyOffElementByIndex(" + pIndex + ",1)'>save</button><button onclick='modifyOffElementByIndex(" + pIndex + ",0)'>modify off</button><input type='hidden' id='" + pIndex + "'>"
+    children[1].innerHTML = "<input type='date' id='inpDate1" + pIndex + "' value='" + children[1].innerText + "'>"
+    children[2].innerHTML = "<input type='text' id='inpName" + pIndex + "' value='" + children[2].innerText + "'>"
+    children[3].innerHTML = "<input type='text' id='inpDir" + pIndex + "' value='" + children[3].innerText + "'>"
+    children[4].innerHTML = "<input type='date' id='inpDB" + pIndex + "' value='" + children[4].innerText + "'>"
+    children[5].innerHTML = "<input type='text' id='inpSex" + pIndex + "' value='" + children[5].innerText + "'>"
+    children[6].innerHTML = "<input type='text' id='inpCivil" + pIndex + "' value='" + children[6].innerText + "'>"
+    children[7].innerHTML = "<input type='text' id='inpCP" + pIndex + "' value='" + children[7].innerText + "'>"
+    children[8].innerHTML = "<input type='number' id='inpTel" + pIndex + "' value='" + children[8].innerText + "'>"
+    children[9].innerHTML = "<input type='number' id='inpCel" + pIndex + "' value='" + children[9].innerText + "'>"
+    children[10].innerHTML = "<input type='text' id='inpMail" + pIndex + "' value='" + children[10].innerText + "'>"
+
+    children[11].innerHTML = "<button onclick='modifyOffAnswerByIndex(" + pIndex + ",1)'>guardar</button><button onclick='modifyOffAnswerByIndex(" + pIndex + ",0)'>cancelar</button><input type='hidden' id='" + pIndex + "'>"
 }
 
-function modifyOffElementByIndex(pIndex, pSave) {
-    var addResultArray
-    if (localStorage.getItem("lAddResultArray") !== null) {
-        addResultArray = JSON.parse(localStorage.getItem("lAddResultArray"));
+function modifyOffAnswerByIndex(pIndex, pSave) {
+    var initialFormArray
+    if (localStorage.getItem("lInitialFormArray") !== null) {
+        initialFormArray = JSON.parse(localStorage.getItem("lInitialFormArray"));
     }
 
     var element = document.getElementById(pIndex)
@@ -310,26 +326,56 @@ function modifyOffElementByIndex(pIndex, pSave) {
 
     if(pSave===0){
         //modify off
-        children[1].innerHTML = addResultArray[pIndex].num1
-        children[2].innerHTML = addResultArray[pIndex].num2
-        children[4].innerHTML = "<button onclick='modifyOnElementByIndex(" + pIndex + ")'>modify</button><input type='hidden' id='" + pIndex + "'>";
+        children[1].innerHTML = initialFormArray[pIndex].date
+        children[2].innerHTML = initialFormArray[pIndex].name
+        children[3].innerHTML = initialFormArray[pIndex].address
+        children[4].innerHTML = initialFormArray[pIndex].datebirth
+        children[5].innerHTML = initialFormArray[pIndex].sex
+        children[6].innerHTML = initialFormArray[pIndex].civil
+        children[7].innerHTML = initialFormArray[pIndex].cp
+        children[8].innerHTML = initialFormArray[pIndex].tel
+        children[9].innerHTML = initialFormArray[pIndex].cel
+        children[10].innerHTML = initialFormArray[pIndex].mail
+
+        children[11].innerHTML = "<button onclick='modifyOnElementByIndex(" + pIndex + ")'>modificar</button><input type='hidden' id='" + pIndex + "'>";
 
     } else {
         //save
-        var input1 = document.getElementById("inpNum1x"+pIndex).value
-        var input2 = document.getElementById("inpNum2x"+pIndex).value
-        var newResult = parseInt(input1)+parseInt(input2)
+        var input1 = document.getElementById("inpDate1"+pIndex).value
+        var input2 = document.getElementById("inpName"+pIndex).value
+        var input3 = document.getElementById("inpDir"+pIndex).value
+        var input4 = document.getElementById("inpDB"+pIndex).value
+        var input5 = document.getElementById("inpSex"+pIndex).value
+        var input6 = document.getElementById("inpCivil"+pIndex).value
+        var input7 = document.getElementById("inpCP"+pIndex).value
+        var input8 = document.getElementById("inpTel"+pIndex).value
+        var input9 = document.getElementById("inpCel"+pIndex).value
+        var input10 = document.getElementById("inpMail"+pIndex).value
 
-        addResultArray[pIndex].num1 = input1
-        addResultArray[pIndex].num2 = input2
-        addResultArray[pIndex].result = newResult
+        initialFormArray[pIndex].date = input1
+        initialFormArray[pIndex].name = input2
+        initialFormArray[pIndex].address = input3
+        initialFormArray[pIndex].datebirth = input4
+        initialFormArray[pIndex].sex = input5
+        initialFormArray[pIndex].civil = input6
+        initialFormArray[pIndex].cp = input7
+        initialFormArray[pIndex].tel = input8
+        initialFormArray[pIndex].cel = input9
+        initialFormArray[pIndex].mail = input10
 
         children[1].innerHTML = input1
         children[2].innerHTML = input2
-        children[3].innerHTML = newResult
-        children[4].innerHTML = "<button onclick='modifyOnElementByIndex(" + pIndex + ")'>modify</button><input type='hidden' id='" + pIndex + "'>";
+        children[3].innerHTML = input3
+        children[4].innerHTML = input4
+        children[5].innerHTML = input5
+        children[6].innerHTML = input6
+        children[7].innerHTML = input7
+        children[8].innerHTML = input8
+        children[9].innerHTML = input9
+        children[10].innerHTML = input10
+        children[11].innerHTML = "<button onclick='modifyOnAnswerByIndex(" + pIndex + ")'>modificar</button><input type='hidden' id='" + pIndex + "'>";
 
-        localStorage.setItem("lAddResultArray", JSON.stringify(addResultArray))
+        localStorage.setItem("lInitialFormArray", JSON.stringify(initialFormArray))
     }
 }
 
@@ -400,6 +446,7 @@ function add() {
     cleanForm()
     addResultToTable(date1, hour, doctors, especialidad, reason)
     addResultToStorage(date1, hour, doctors, especialidad, reason)
+    document.getElementById("messageC").innerHTML= "Su cita fue programada satisfactoriamente. Si por algún motivo no puede asistir, por favor agéndela nuevamente."
 
 }
 //
@@ -552,7 +599,7 @@ function initialForm() {
     var cel = document.getElementById("cel").value
     var mail = document.getElementById("mail").value
     // 
-    document.getElementById("message").innerHTML= "Sus datos fueron guardados correctamente. Si necesita actualizar su información, por favor llene el formulario nuevamente."
+    document.getElementById("message").innerHTML= "Sus datos fueron guardados correctamente. Si necesita actualizar su información, por favor llene el formulario nuevamente o contacte al administrador."
     
     cleanFormInitial()
     addFormToStorage(date, name, address, datebirth, sex, civil, cp, tel, cel, mail)
