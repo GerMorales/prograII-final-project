@@ -17,7 +17,7 @@ function checkLogin() {
                 //need a method to get the role and send it into createSessionUser below
                 var role = getUserRole(user, password, userArray)
                 createSessionUser(user, password, role)
-                window.location.href = "http://localhost:5000/dashboard";
+                window.location.href = "https://registro-medico.herokuapp.com/dashboard";
             } else {
                 alert("La contraseña o el usuario no es correcto");
             }
@@ -97,7 +97,7 @@ function registerNewUser() {
 
     localStorage.setItem("lUserArray", JSON.stringify(userArray));
 
-    window.location.href = "http://localhost:5000/login"
+    window.location.href = "https://registro-medico.herokuapp.com/login"
 }
 
 /*
@@ -126,7 +126,7 @@ function checkForValidLoginSession() {
     */
 
     if (sessionStorage.getItem("loggedUser") == null) {
-        window.location.href = "http://localhost:5000/login"
+        window.location.href = "https://registro-medico.herokuapp.com/login"
     }
 }
 
@@ -162,7 +162,7 @@ function modifyDashboardForRole(pCurrentRole) {
 
 function logout() {
     sessionStorage.removeItem("loggedUser")
-    window.location.href = "http://localhost:5000/"
+    window.location.href = "https://registro-medico.herokuapp.com/"
 }
 
 
